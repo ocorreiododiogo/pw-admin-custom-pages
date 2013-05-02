@@ -10,7 +10,7 @@ So, how to create a new admin page?
 
 2. Create a new page under "Admin" with the "admin" template, and assign to it the "ProcessAdminCustomPages" process (there will be a new link on the admin nav)
 
-3. Create new page as children of that one with any template that you want (This will work as any normal page, and in the template file you can use normal PW variables as $page)
+3. Create new page as children of that one with any template that you want (This will work as any normal page, and in the template file you can use normal PW variables such as $page and $pages)
  
 4. Go to the new link in the admin and see what happens
 
