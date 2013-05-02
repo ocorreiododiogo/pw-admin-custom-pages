@@ -1,0 +1,87 @@
+<?php
+
+/*
+  * Admin Custom Pages Module v 1.0.0
+	* Create custom admin pages without building a Process Module
+	*
+	* @author Diogo Oliveira
+	*
+	* ProcessWire 2.x
+	* Copyright (C) 2011 by Ryan Cramer
+	* Licensed under GNU/GPL v2, see LICENSE.TXT
+	*
+	* http://www.processwire.com
+	*
+*/
+
+class ProcessAdminCustomPages extends Process implements Module, ConfigurableModule {
+	
+	static public function getModuleInfo() {
+		return array(
+			'title'   => 'Admin Custom Pages',
+			'summary' => 'Create custom admin pages without building a Process Module',
+			'version' => 100,
+			'author'  => 'Diogo Oliveira'
+		);
+	}
+
+	public function init() {
+
+		parent::init();
+
+		// set the defaults
+		$this->scriptsFolder = ($this->scriptsFolder != "") ? $this->scriptsFolder : "scripts";
+		$this->stylesFolder = ($this->stylesFolder != "") ? $this->stylesFolder : "styles";
+
+		// get the folder for each particular template
+		$scriptsForTemplate = $this->scriptsFolder . '/' . wire('page')->child->template . '/';
+		$stylesForTemplate = $this->stylesFolder . '/' . wire('page')->child->template . '/';
+
+		// get the path for the folders
+		$scriptsPath = wire('config')->paths->templates . $scriptsForTemplate;
+		$stylesPath = wire('config')->paths->templates . $stylesForTemplate;
+
+		// if folder exists, load all the scripts inside it
+		if (file_exists($scriptsPath) and is_dir($scriptsPath)) {
+			foreach (scandir($scriptsPath) as $f){
+				wire('config')->scripts->add(wire('config')->config->urls->templates . $scriptsForTemplate. $f);
+			}
+		}
+
+		// if folder exists, load all the styles inside it
+		if (file_exists($stylesPath) and is_dir($stylesPath)) {
+			foreach (scandir($stylesPath) as $f){
+				wire('config')->styles->add(wire('config')->config->urls->templates . $stylesForTemplate . $f);
+			}
+		}
+
+	}
+
+	public function ___execute() {
+		return $this->page->child->render();
+	}
+
+	
+	public static function getModuleConfigInputfields(array $data) {
+        $inputfields = new InputfieldWrapper(); 
+		
+		// input field to get custom scripts folder
+        $field = wire('modules')->get('InputfieldText');
+        $field->name = 'scriptsFolder';
+        $field->label = "Folder to put the scripts";
+        $field->description = 'All files in this folder will be loaded as scripts. This folder should be inside the templates folder. If empty defaults to "scripts".';
+        if(isset($data['scriptsFolder'])) $field->value = $data['scriptsFolder'];
+        $inputfields->add($field); 
+ 
+ 		// input field to get custom styles folder
+        $field = wire('modules')->get('InputfieldText'); 
+        $field->name = 'stylesFolder';
+        $field->label = 'Folder to put the styles';
+        $field->description = 'All files in this folder will be loaded as styles. This folder should be inside the templates folder. If empty defaults to "styles".';
+        if(isset($data['stylesFolder'])) $field->value = $data['stylesFolder'];
+        $inputfields->add($field);
+ 
+        return $inputfields; 
+    }
+    
+}
