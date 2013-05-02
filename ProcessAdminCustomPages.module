@@ -1,18 +1,18 @@
 <?php
 
 /*
- * Admin Custom Pages Module v 1.0.0
- * Create custom admin pages without building a Process Module
- *
- * @author Diogo Oliveira
- *
- * ProcessWire 2.x
- * Copyright (C) 2011 by Ryan Cramer
- * Licensed under GNU/GPL v2, see LICENSE.TXT
- *
- * http://www.processwire.com
- *
- */
+	* Admin Custom Pages Module v 1.0.0
+	* Create custom admin pages without building a Process Module
+	*
+	* @author Diogo Oliveira
+	*
+	* ProcessWire 2.x
+	* Copyright (C) 2011 by Ryan Cramer
+	* Licensed under GNU/GPL v2, see LICENSE.TXT
+	*
+	* http://www.processwire.com
+	*
+*/
 
 class ProcessAdminCustomPages extends Process implements Module, ConfigurableModule {
 	
@@ -44,14 +44,18 @@ class ProcessAdminCustomPages extends Process implements Module, ConfigurableMod
 		// if folder exists, load all the scripts inside it
 		if (file_exists($scriptsPath) and is_dir($scriptsPath)) {
 			foreach (scandir($scriptsPath) as $f){
-				wire('config')->scripts->add(wire('config')->config->urls->templates . $scriptsForTemplate. $f);
+				if ($f != "." && $f != "..") {
+					wire('config')->scripts->add(wire('config')->config->urls->templates . $scriptsForTemplate. $f);
+				}
 			}
 		}
 
 		// if folder exists, load all the styles inside it
 		if (file_exists($stylesPath) and is_dir($stylesPath)) {
 			foreach (scandir($stylesPath) as $f){
-				wire('config')->styles->add(wire('config')->config->urls->templates . $stylesForTemplate . $f);
+				if ($f != "." && $f != "..") {
+					wire('config')->styles->add(wire('config')->config->urls->templates . $stylesForTemplate . $f);
+				}
 			}
 		}
 
