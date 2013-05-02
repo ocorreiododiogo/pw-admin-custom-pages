@@ -6,7 +6,7 @@ The module does something very simple. This is a process that you can assign to 
 
 So, how to create a new admin page?
 
-1. Install the module (drop the file in /site/modules/)
+1. Install the module (drop the file in /site/modules/ and install it in the modules tab in the admin)
 
 2. Create a new page under "Admin" with the "admin" template, and assign to it the "ProcessAdminCustomPages" process (there will be a new link on the admin nav)
 
