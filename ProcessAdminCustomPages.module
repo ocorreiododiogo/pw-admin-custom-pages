@@ -14,13 +14,13 @@
 	*
 */
 
-class ProcessAdminCustomPages extends Process implements Module, ConfigurableModule {
-
+class ProcessAdminCustomPages extends Process {
+	
 	static public function getModuleInfo() {
 		return array(
 			'title'   => 'Admin Custom Pages',
 			'summary' => 'Create custom admin pages without building a Process Module',
-			'version' => 100,
+			'version' => 103,
 			'author'  => 'Diogo Oliveira'
 		);
 	}
@@ -29,63 +29,57 @@ class ProcessAdminCustomPages extends Process implements Module, ConfigurableMod
 
 		parent::init();
 
-		// set the defaults
-		$this->scriptsFolder = ($this->scriptsFolder != "") ? $this->scriptsFolder : "scripts";
-		$this->stylesFolder = ($this->stylesFolder != "") ? $this->stylesFolder : "styles";
+		// load script and style files for this page (expects a ACP_scripts_and_styles field with one url per line)
+		if ($this->page->ACP_scripts_and_styles != "") {
 
-		// get the folder for each particular template
-		$scriptsForTemplate = $this->scriptsFolder . '/' . wire('page')->child->template . '/';
-		$stylesForTemplate = $this->stylesFolder . '/' . wire('page')->child->template . '/';
+			// get one url for each line of the field
+			$files = explode("\n", $this->page->ACP_scripts_and_styles);
 
-		// get the path for the folders
-		$scriptsPath = wire('config')->paths->templates . $scriptsForTemplate;
-		$stylesPath = wire('config')->paths->templates . $stylesForTemplate;
+			foreach ($files as $f) {
 
-		// if folder exists, load all the scripts inside it
-		if (file_exists($scriptsPath) and is_dir($scriptsPath)) {
-			foreach (scandir($scriptsPath) as $f){
-				if ($f != "." && $f != "..") {
-					wire('config')->scripts->add(wire('config')->config->urls->templates . $scriptsForTemplate. $f);
+				// get the file extension
+				$extension = trim(substr(strrchr($f,'.'),1));
+				
+				// check if url is absolute, if not concatenate it with the site root url
+				if (strpos($f, "http://") === false) {
+					$f = $this->config->urls->root . $f;
+				}
+
+				// load the correct type of file
+				switch ($extension) {
+
+					case "js":
+						$this->config->scripts->add($f);
+						break;
+
+					case "css":
+						$this->config->styles->add($f);
+						break;
 				}
 			}
 		}
-
-		// if folder exists, load all the styles inside it
-		if (file_exists($stylesPath) and is_dir($stylesPath)) {
-			foreach (scandir($stylesPath) as $f){
-				if ($f != "." && $f != "..") {
-					wire('config')->styles->add(wire('config')->config->urls->templates . $stylesForTemplate . $f);
-				}
-			}
-		}
-
 	}
 
 	public function ___execute() {
-		return $this->page->child->render();
+
+		$template_file = $this->config->paths->templates . $this->page->template->name . ".php";
+
+		if (file_exists($template_file)) {
+
+			// only works with dev version of ProcessWire May 8 2013
+			return $this->page->render($template_file);
+
+		} elseif ($this->page->child->id) {
+
+			// for the current stable version use this method
+			return $this->page->child->render();
+
+		} else {
+
+			return $this->error("You should provide either a file named {$this->page->template->name}.php in your templates folder (for DEV version of PW), or a child of this page to render here"); 
+
+		}
+
 	}
-
-
-	public static function getModuleConfigInputfields(array $data) {
-        $inputfields = new InputfieldWrapper(); 
-
-		// input field to get custom scripts folder
-        $field = wire('modules')->get('InputfieldText');
-        $field->name = 'scriptsFolder';
-        $field->label = "Folder to put the scripts";
-        $field->description = 'All files in this folder will be loaded as scripts. This folder should be inside the templates folder. If empty defaults to "scripts".';
-        if(isset($data['scriptsFolder'])) $field->value = $data['scriptsFolder'];
-        $inputfields->add($field); 
- 
- 		// input field to get custom styles folder
-        $field = wire('modules')->get('InputfieldText'); 
-        $field->name = 'stylesFolder';
-        $field->label = 'Folder to put the styles';
-        $field->description = 'All files in this folder will be loaded as styles. This folder should be inside the templates folder. If empty defaults to "styles".';
-        if(isset($data['stylesFolder'])) $field->value = $data['stylesFolder'];
-        $inputfields->add($field);
- 
-        return $inputfields; 
-    }
     
-}
+} 
