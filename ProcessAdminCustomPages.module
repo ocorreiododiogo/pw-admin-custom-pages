@@ -1,7 +1,7 @@
 <?php
 
 /*
-	* Admin Custom Pages Module v 1.0.0
+	* Admin Custom Pages Module v 1.0.1
 	* Create custom admin pages without building a Process Module
 	*
 	* @author Diogo Oliveira
@@ -14,13 +14,13 @@
 	*
 */
 
-class ProcessAdminCustomPages extends Process implements Module, ConfigurableModule {
+class ProcessAdminCustomPages extends Process {
 	
 	static public function getModuleInfo() {
 		return array(
 			'title'   => 'Admin Custom Pages',
 			'summary' => 'Create custom admin pages without building a Process Module',
-			'version' => 100,
+			'version' => 101,
 			'author'  => 'Diogo Oliveira'
 		);
 	}
@@ -29,63 +29,48 @@ class ProcessAdminCustomPages extends Process implements Module, ConfigurableMod
 
 		parent::init();
 
-		// set the defaults
-		$this->scriptsFolder = ($this->scriptsFolder != "") ? $this->scriptsFolder : "scripts";
-		$this->stylesFolder = ($this->stylesFolder != "") ? $this->stylesFolder : "styles";
+		if ($this->page->ACP_scripts_and_styles != "") {
 
-		// get the folder for each particular template
-		$scriptsForTemplate = $this->scriptsFolder . '/' . wire('page')->child->template . '/';
-		$stylesForTemplate = $this->stylesFolder . '/' . wire('page')->child->template . '/';
+			$files = explode("\n", $this->page->ACP_scripts_and_styles);
 
-		// get the path for the folders
-		$scriptsPath = wire('config')->paths->templates . $scriptsForTemplate;
-		$stylesPath = wire('config')->paths->templates . $stylesForTemplate;
+			foreach ($files as $f) {
 
-		// if folder exists, load all the scripts inside it
-		if (file_exists($scriptsPath) and is_dir($scriptsPath)) {
-			foreach (scandir($scriptsPath) as $f){
-				if ($f != "." && $f != "..") {
-					wire('config')->scripts->add(wire('config')->config->urls->templates . $scriptsForTemplate. $f);
+				$extension = trim(substr(strrchr($f,'.'),1));
+				
+				if (strpos($f, "http://") === false) {
+					$f = $this->config->urls->root . $f;
+				}
+
+				switch ($extension) {
+
+					case "js":
+						wire('config')->scripts->add($f);
+						break;
+
+					case "css":
+						wire('config')->styles->add($f);
+						break;
 				}
 			}
 		}
-
-		// if folder exists, load all the styles inside it
-		if (file_exists($stylesPath) and is_dir($stylesPath)) {
-			foreach (scandir($stylesPath) as $f){
-				if ($f != "." && $f != "..") {
-					wire('config')->styles->add(wire('config')->config->urls->templates . $stylesForTemplate . $f);
-				}
-			}
-		}
-
 	}
 
 	public function ___execute() {
-		return $this->page->child->render();
-	}
 
-	
-	public static function getModuleConfigInputfields(array $data) {
-        $inputfields = new InputfieldWrapper(); 
-		
-		// input field to get custom scripts folder
-        $field = wire('modules')->get('InputfieldText');
-        $field->name = 'scriptsFolder';
-        $field->label = "Folder to put the scripts";
-        $field->description = 'All files in this folder will be loaded as scripts. This folder should be inside the templates folder. If empty defaults to "scripts".';
-        if(isset($data['scriptsFolder'])) $field->value = $data['scriptsFolder'];
-        $inputfields->add($field); 
- 
- 		// input field to get custom styles folder
-        $field = wire('modules')->get('InputfieldText'); 
-        $field->name = 'stylesFolder';
-        $field->label = 'Folder to put the styles';
-        $field->description = 'All files in this folder will be loaded as styles. This folder should be inside the templates folder. If empty defaults to "styles".';
-        if(isset($data['stylesFolder'])) $field->value = $data['stylesFolder'];
-        $inputfields->add($field);
- 
-        return $inputfields; 
-    }
+		if ($this->page->ACP_render_file != "") {
+
+			return $this->page->render($this->page->ACP_render_file);
+
+		} elseif ($this->page->child->id) {
+
+			return $this->page->child->render();
+
+		} else {
+
+			return $this->error("You didn't provide a file name (ACP_render_file field) or a child of this page to render");
+
+		}
+
+	}
     
 }
