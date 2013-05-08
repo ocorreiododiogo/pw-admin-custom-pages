@@ -29,7 +29,8 @@ but also works with the stable version. Differences are explained bellow.
 1. Create a new template **with** a file (name it whatever you wish)
 2. In the advanced settings insert "admin" as the Alternate Template Filename
 3. Create a new page under "Admin" and give it the newly created template
-4. In the template file you can use PW variables as in any normal template (yes, pretend you didn't change the file in the settings)
+4. Doesn't exist ;)
+5. In the template file you can use PW variables as in any normal template (yes, pretend you didn't change the file in the settings)
 
 ### To add custom script and style files to the page:
 
