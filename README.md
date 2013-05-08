@@ -21,6 +21,8 @@ but also works with the stable version. Differences are explained bellow.
 3. Create a new page under "Admin" and give it the newly created template
 4. create a page as children and give it any template (this is the template that will be rendered in the admin page)
 5. In this template file you can use PW variables as in any normal template
+  
+--
 
 *In the current PW DEV version*
 
@@ -33,6 +35,8 @@ but also works with the stable version. Differences are explained bellow.
 
 1. Add the "ACP_scripts_and_styles" to the page template (the one created in the point 1 of the previous instructions)
 2. Add the .js and .css URLs in this field textarea, one in each line
+  
 
+--
 
 That's it! Hope you enjoy the module :)
