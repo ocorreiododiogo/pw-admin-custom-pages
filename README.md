@@ -2,18 +2,37 @@
 
 ### Create custom admin pages easily without having to build a Process Module.
  
-The module does something very simple. This is a process that you can assign to any page that has the "admin" template, and renders another page inside the admin template. I chose to render the page that is children of this custom admin page.
+The new version of this module works better with the current DEV version of PW, 
+but also works with the stable version. Differences are explained bellow.
 
-So, how to create a new admin page?
 
-1. Install the module (drop the file in /site/modules/ and install it in the modules tab in the admin)
+### To prepare the module:
 
-2. Create a new page under "Admin" with the "admin" template, and assign to it the "ProcessAdminCustomPages" process (there will be a new link on the admin nav)
+1. Install the module by placing the module file in /site/modules/
+2. Replace the /site/templates/admin.php that comes with your pw install, by the provided file with the same name.
+3. Create a new textarea field named "ACP_scripts_and_styles"
 
-3. Create new page as children of that one with any template that you want (This will work as any normal page, and in the template file you can use normal PW variables such as $page and $pages)
- 
-4. Go to the new link in the admin and see what happens
+### To create the pages:
 
-### To load scripts and styles
+*In the current PW stable version*
 
-To load JS and CSS files for each template, create a folder with the same name as the rendered page template inside the scripts and styles folders (defaults to the folders that come by default with PW but you can change it in the module settings to suit your needs) and place inside them any number of .js and .css files (.js files in the scripts folder and .css files in the styles folder). they will all be loaded.
+1. Create a new template **without** a file (name it whatever you wish)
+2. In the advanced settings insert "admin" as the Alternate Template Filename
+3. Create a new page under "Admin" and give it the newly created template
+4. create a page as children and give it any template (this is the template that will be rendered in the admin page)
+5. In this template file you can use PW variables as in any normal template
+
+*In the current PW DEV version*
+
+1. Create a new template **with** a file (name it whatever you wish)
+2. In the advanced settings insert "admin" as the Alternate Template Filename
+3. Create a new page under "Admin" and give it the newly created template
+4. In the template file you can use PW variables as in any normal template (yes, pretend you didn't change the file in the settings)
+
+### To add custom script and style files to the page:
+
+1. Add the "ACP_scripts_and_styles" to the page template (the one created in the point 1 of the previous instructions)
+2. Add the .js and .css URLs in this field textarea, one in each line
+
+
+That's it! Hope you enjoy the module :)
