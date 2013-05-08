@@ -35,8 +35,7 @@ but also works with the stable version. Differences are explained bellow.
 ### To add custom script and style files to the page:
 
 1. Add the "ACP_scripts_and_styles" to the page template (the one created on point 1. of the previous instructions)
-2. Add the .js and .css URLs in this field textarea, one in each line
-  
+2. Add the .js and .css URLs in this field textarea, one in each line. can be absolute or relative (relative is assumed from the site root on eg:/site/templates/styles/my.css)
 
 --
 
