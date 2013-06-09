@@ -9,8 +9,6 @@ but also works with the stable version. Differences are explained bellow.
 ### To prepare the module:
 
 1. Install the module by placing the module file in /site/modules/
-2. Replace the /site/templates/admin.php that comes with your pw install, by the provided file with the same name.
-3. Create a new textarea field named "ACP_scripts_and_styles"
 
 ### To create the pages:
 
