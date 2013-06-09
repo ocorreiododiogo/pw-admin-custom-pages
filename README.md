@@ -5,10 +5,12 @@
 The new version of this module works better with the current DEV version of PW, 
 but also works with the stable version. Differences are explained bellow.
 
+Version 1.0.4 automaticaly replaces the default admin.php file in the templates folder by the provided one and creates a new field called "ACP_scripts_and_styles" during the instalation process. This functionality was added by Pete (https://github.com/Notanotherdotcom)
 
 ### To prepare the module:
 
-1. Install the module by placing the module file in /site/modules/
+1. Place the module folder in /site/modules/
+2. Install the module in the modules page from the admin
 
 ### To create the pages:
 
@@ -32,7 +34,7 @@ but also works with the stable version. Differences are explained bellow.
 
 ### To add custom script and style files to the page:
 
-1. Add the "ACP_scripts_and_styles" to the page template (the one created on point 1. of the previous instructions)
+1. Add the "ACP_scripts_and_styles" to the page template (the field that was created automaticaly on instalation)
 2. Add the .js and .css URLs in this field textarea, one in each line. can be absolute or relative (relative is assumed from the site root on eg: site/templates/styles/my.css)
 
 --
