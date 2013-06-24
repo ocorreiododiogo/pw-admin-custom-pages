@@ -74,7 +74,7 @@ class ProcessAdminCustomPages extends Process {
 			// for the current stable version use this method
 			// 'include=hidden' added by suggestion of Macrura and kongondo at the forum
 			// http://processwire.com/talk/topic/3474-admin-custom-pages-module/?p=38304
-			return $this->page->child->render('include=hidden');
+			return $this->page->child('include=hidden')->render();
 
 		} else {
 
