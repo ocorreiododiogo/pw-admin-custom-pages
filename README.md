@@ -19,7 +19,7 @@ Version 1.0.4 automaticaly replaces the default admin.php file in the templates 
 1. Create a new template **without** a file (name it whatever you wish)
 2. In the advanced settings insert "admin" as the Alternate Template Filename
 3. Create a new page under "Admin" and give it the newly created template
-4. create a page as children and give it any template (this is the template that will be rendered in the admin page)
+4. create a page as children and give it any template (this is the template that will be rendered in the admin page. For use with a theme that uses dropdown menus, set this tpage to "hidden" in the settings tab)
 5. In this template file you can use PW variables as in any normal template
   
 --
