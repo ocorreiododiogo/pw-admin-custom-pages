@@ -20,7 +20,7 @@ class ProcessAdminCustomPages extends Process {
 		return array(
 			'title'   => 'Admin Custom Pages',
 			'summary' => 'Create custom admin pages without building a Process Module',
-			'version' => 104,
+			'version' => 105,
 			'author'  => 'Diogo Oliveira',
 			'permission' => 'page-view'
 		);
