@@ -47,7 +47,8 @@ Since cersion 1.0.4 the installation process automaticaly replaces the default a
 
 If you are greeted with this message after creating a custom admin page, verify that the /site/templates/admin.php file was modified during the installation process.
 If the file in your template folder is not similar to the one packed with the module, replacing it should solve the problem.
-These the particular lines to look for:
+
+These are the particular lines to look for:
 
     // line added for the Custom Admin Pages Module
     if($page->template->id !== 2) $page->process = "ProcessAdminCustomPages";
