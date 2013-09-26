@@ -46,7 +46,7 @@ Since cersion 1.0.4 the installation process automaticaly replaces the default a
 > This page has no Process assigned.
 
 If you are greeted with this message after creating a custom admin page, verify that the /site/templates/admin.php file was modified during the installation process.
-If the file in template folder is not similar to the one packed with the module, replacing it should solve the problem.
+If the file in your template folder is not similar to the one packed with the module, replacing it should solve the problem.
 These the particular lines to look for:
 
     // line added for the Custom Admin Pages Module
