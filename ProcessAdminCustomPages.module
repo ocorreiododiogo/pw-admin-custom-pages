@@ -78,7 +78,8 @@ class ProcessAdminCustomPages extends Process {
 			return $this->page->child('include=hidden')->render();
 
 		} else {
-
+			// deprecated since the module now assumes that in this case this page has another process instead of this one
+			// (ProcessPageEdit)
 			return $this->error("You should provide either a file named {$this->page->template->name}.php in your templates folder (for DEV version of PW), or a child of this page to render here"); 
 
 		}
