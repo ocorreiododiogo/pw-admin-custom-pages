@@ -1,7 +1,7 @@
 <?php
 
 /*
-	* Admin Custom Pages Module v 1.0.4
+	* Admin Custom Pages Module v 1.0.6
 	* Create custom admin pages without building a Process Module
 	*
 	* @author Diogo Oliveira
@@ -20,7 +20,7 @@ class ProcessAdminCustomPages extends Process {
 		return array(
 			'title'   => 'Admin Custom Pages',
 			'summary' => 'Create custom admin pages without building a Process Module',
-			'version' => 105,
+			'version' => 106,
 			'author'  => 'Diogo Oliveira',
 			'permission' => 'page-view'
 		);
