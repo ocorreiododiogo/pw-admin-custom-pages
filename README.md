@@ -1,6 +1,8 @@
 # Admin Custom Pages Module for ProcessWire 
 ###((dev version))
 
+((For updgrading to this version you need to replace, both, the module file and the admin.php file in the templates folder))
+
 ### Create custom admin pages easily without having to build a Process Module.
  
 The new version of this module works better with the current DEV version of PW, 
