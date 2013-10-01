@@ -1,4 +1,4 @@
-# Admin Custom Pages Module for ProcessWire
+# Admin Custom Pages Module for ProcessWire (dev version)
 
 ### Create custom admin pages easily without having to build a Process Module.
  
@@ -28,7 +28,7 @@ Since cersion 1.0.4 the installation process automaticaly replaces the default a
 
 *In the current PW DEV version*
 
-1. Create a new template **with** a file (name it whatever you wish)
+1. Create a new template **with a file** (name it whatever you wish)
 2. In the advanced settings insert "admin" as the Alternate Template Filename
 3. Create a new page under "Admin" and give it the newly created template
 4. Doesn't exist ;)
@@ -38,6 +38,15 @@ Since cersion 1.0.4 the installation process automaticaly replaces the default a
 
 1. Add the "ACP_scripts_and_styles" to the page template (the field that was created automaticaly on instalation)
 2. Add the .js and .css URLs in this field textarea, one in each line. can be absolute or relative (relative is assumed from the site root on eg: site/templates/styles/my.css)
+
+--
+
+### ((NEW)) To create a tab in the admin for editing a page (example: a "settings" page):
+
+1. Create a template **without a file**
+2. In the advanced settings insert "admin" as the Alternate Template Filename
+3. Create a new page under "Admin" and give it the newly created template
+4. Don't create children pages from that page
 
 --
 
