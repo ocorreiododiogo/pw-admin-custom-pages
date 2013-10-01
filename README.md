@@ -41,7 +41,8 @@ Since cersion 1.0.4 the installation process automaticaly replaces the default a
 
 --
 
-### ((NEW)) To create a tab in the admin for editing a page (example: a "settings" page):
+#### ((NEW))
+### To create a tab in the admin for editing a page – example: a "settings" page:
 
 1. Create a template **without a file**
 2. In the advanced settings insert "admin" as the Alternate Template Filename
