@@ -18,7 +18,16 @@
  */
 
 
-// line added for the Custom Admin Pages Module
-if($page->template->id !== 2) $page->process = "ProcessAdminCustomPages";
+// code isnside the condition added for the Custom Admin Pages Module
+if($page->template->id !== 2) {
+	if (file_exists($template_file) || $this->page->child->id) {
+		$page->process = "ProcessAdminCustomPages";
+	} else {
+		$page->process = "ProcessPageEdit";
+		$_GET['id'] = $page->id;
+	}
+}
+// end of code for the Custom Admin Pages Module
+
 
 require($config->paths->adminTemplates . 'controller.php'); 
