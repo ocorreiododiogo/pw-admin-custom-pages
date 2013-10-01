@@ -53,6 +53,8 @@ Since cersion 1.0.4 the installation process automaticaly replaces the default a
 3. Create a new page under "Admin" and give it the newly created template
 4. Don't create children pages from that page
 
+In short: if there isn't a file with the name of the template and the page has no children, it's assumed that this is an "edit page"
+
 --
 
 ### Troubleshooting:
