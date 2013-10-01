@@ -18,7 +18,7 @@
  */
 
 
-// code isnside the condition added for the Custom Admin Pages Module
+// code inside the condition added for the Custom Admin Pages Module
 if($page->template->id !== 2) {
 	if (file_exists($template_file) || $this->page->child->id) {
 		$page->process = "ProcessAdminCustomPages";
