@@ -64,10 +64,13 @@ In short: if there isn't a file with the name of the template and the page has n
 If you are greeted with this message after creating a custom admin page, verify that the /site/templates/admin.php file was modified during the installation process.
 If the file in your template folder is not similar to the one packed with the module, replacing it should solve the problem.
 
-These are the particular lines to look for:
+The particular lines to look for are from:
 
-    // line added for the Custom Admin Pages Module
-    if($page->template->id !== 2) $page->process = "ProcessAdminCustomPages";
+    // code inside the condition added for the Custom Admin Pages Module
+   
+to:
+   
+    // end of code for the Custom Admin Pages Module
 
 
 
