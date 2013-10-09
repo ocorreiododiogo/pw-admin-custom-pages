@@ -5,7 +5,7 @@
 The new version of this module works better with the current DEV version of PW, 
 but also works with the stable version. Differences are explained bellow.
 
-Since version 1.0.4 the installation process automaticaly replaces the default admin.php file in the templates folder by the provided one and creates a new field called "ACP_scripts_and_styles". This functionality was added by [Pete](https://github.com/Notanotherdotcom)
+Since cersion 1.0.4 the installation process automaticaly replaces the default admin.php file in the templates folder by the provided one and creates a new field called "ACP_scripts_and_styles". This functionality was added by [Pete](https://github.com/Notanotherdotcom)
 
 **Note:** If you (or a module) already customised the admin.php file before, make a backup of that file, and add the custom code to the newly created admin.php. 
 
