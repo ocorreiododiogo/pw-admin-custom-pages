@@ -63,4 +63,4 @@ Support forum: http://processwire.com/talk/topic/3474-admin-custom-pages-module/
 
 --
 
-That's it! Hope you enjoy the module :)
+That's it! Hope you enjoy the module ;)
