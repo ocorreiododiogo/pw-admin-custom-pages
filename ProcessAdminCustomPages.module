@@ -6,6 +6,8 @@
 	*
 	* @author Diogo Oliveira
 	*
+	* @modified Nico Knoll
+	*
 	* ProcessWire 2.x
 	* Copyright (C) 2011 by Ryan Cramer
 	* Licensed under GNU/GPL v2, see LICENSE.TXT
@@ -20,9 +22,10 @@ class ProcessAdminCustomPages extends Process {
 		return array(
 			'title'   => 'Admin Custom Pages',
 			'summary' => 'Create custom admin pages without building a Process Module',
-			'version' => 105,
+			'version' => 110,
 			'author'  => 'Diogo Oliveira',
-			'permission' => 'page-view'
+			'permission' => 'page-view',
+			'requires' => array('FieldtypeAdminCustomPagesSelect')
 		);
 	}
 
@@ -62,8 +65,8 @@ class ProcessAdminCustomPages extends Process {
 	}
 
 	public function ___execute() {
-
-		$template_file = $this->config->paths->templates . $this->page->template->name . ".php";
+				
+		$template_file = $this->page->ACP_template;
 
 		if (file_exists($template_file)) {
 
@@ -79,7 +82,7 @@ class ProcessAdminCustomPages extends Process {
 
 		} else {
 
-			return $this->error("You should provide either a file named {$this->page->template->name}.php in your templates folder (for DEV version of PW), or a child of this page to render here"); 
+			return $this->error("You have to assign a template file to this 'Admin Custom Page'."); 
 
 		}
 
@@ -88,27 +91,65 @@ class ProcessAdminCustomPages extends Process {
 	// install method created by Pete (https://github.com/Notanotherdotcom)
 	public function ___install() {
 		
-		// Copy the admin.php template over the old one
-		echo wire('config')->paths->siteModules . 'ProcessAdminCustomPages/admin.php' . '||' . wire('config')->paths->templates . 'admin.php';
-		//exit;
-		copy ( wire('config')->paths->siteModules . 'ProcessAdminCustomPages/admin.php', wire('config')->paths->templates . 'admin.php');
+		// Check if PW 2.4 or higher is installed
+		if(ProcessWire::versionMajor == 2 && ProcessWire::versionMinor < 4) {
+			throw new WireException("This module requires ProcessWire 2.4 or newer");
+		}		
 		
 		// Check for existence of the field below, throw a message if it already exists
-		if($this->fields->get('ACP_scripts_and_styles')) {
-			//$this->error("You already have a 'ACP_scripts_and_styles' field.");
-			return;
+		if($this->fields->get('ACP_scripts_and_styles') == NULL) {
+			// If it doesn't exist then carry on and create it
+			$field = new Field();
+			$field->type = $this->modules->get("FieldtypeTextarea");
+			$field->name = 'ACP_scripts_and_styles';
+			$field->label = 'Scripts and styles for admin pages';
+			$field->description = 'Add the .js and .css URLs in this field textarea, one in each line. can be absolute or relative (relative is assumed from the site root eg: site/templates/styles/my.css)';
+			$field->save();
+			$this->message("Added field 'ACP_scripts_and_styles'. Add this field to the page template of your custom admin pages when needed.");
 		}
-
-		// If it doesn't exist then carry on and create it
-		$field = new Field();
-		$field->type = $this->modules->get("FieldtypeTextarea");
-		$field->name = 'ACP_scripts_and_styles';
-		$field->label = 'Scripts and styles for admin pages';
-		$field->description = 'Add the .js and .css URLs in this field textarea, one in each line. can be absolute or relative (relative is assumed from the site root eg: site/templates/styles/my.css)';
-		$field->save();
-
-		$this->message("Added field 'ACP_scripts_and_styles'. Add this field to the page template of your custom admin pages when needed.");
 		
+		
+		if($this->fields->get('ACP_template') == NULL) {
+			// If it doesn't exist then carry on and create it
+			$field = new Field();
+			$field->type = $this->modules->get("FieldtypeAdminCustomPagesSelect");
+			$field->name = 'ACP_template';
+			$field->label = 'Template file';
+			$field->description = 'Select the template file which should get rendered. Template files have to be in /site/templates/.';
+			$field->save();
+		
+			// Add field to admin template
+			$adminTemplate = $this->templates->get('admin');
+			$adminTemplate->fields->add($field);
+			$adminTemplate->fields->save();
+			
+			$this->message("Added field 'ACP_template' to admin.");
+		}
+		
+	}
+
+	
+	
+	public function ___uninstall() {
+		// Remove the select field
+		$adminTemplate = $this->templates->get('admin');
+		if($adminTemplate->fields->get('ACP_template')) {
+			$adminTemplate->fields->delete($this->fields->get('ACP_template'));
+			$adminTemplate->save();
+		}
+		
+		// Remove ACP_template
+		if($this->fields->get('ACP_template')) {
+			$field = $this->fields->get('ACP_template');
+			$this->fields->delete($field);
+		}
+		
+		// Remove ACP_scripts_and_styles
+		if($this->fields->get('ACP_scripts_and_styles')) {
+			$field = $this->fields->get('ACP_scripts_and_styles');
+			$this->fields->delete($field);
+		}
+				
 	}
     
 } 
