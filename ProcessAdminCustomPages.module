@@ -65,7 +65,7 @@ class ProcessAdminCustomPages extends Process {
 	}
 
 	public function ___execute() {
-				
+
 		$template_file = $this->page->ACP_template;
 
 		if (file_exists($template_file)) {
@@ -129,13 +129,12 @@ class ProcessAdminCustomPages extends Process {
 	}
 
 	
-	
 	public function ___uninstall() {
 		// Remove the select field
 		$adminTemplate = $this->templates->get('admin');
 		if($adminTemplate->fields->get('ACP_template')) {
-			$adminTemplate->fields->delete($this->fields->get('ACP_template'));
-			$adminTemplate->save();
+			$adminTemplate->fields->remove($adminTemplate->fields->get('ACP_template'));
+			$adminTemplate->fields->save();
 		}
 		
 		// Remove ACP_template
