@@ -21,8 +21,8 @@ class ProcessAdminCustomPages extends Process {
 	static public function getModuleInfo() {
 		return array(
 			'title'   => 'Admin Custom Pages',
-			'summary' => 'Create custom admin pages without building a Process Module',
-			'version' => 110,
+			'summary' => __('Create custom admin pages without building a Process Module'),
+			'version' => 111,
 			'author'  => 'Diogo Oliveira',
 			'permission' => 'page-view',
 			'requires' => array('FieldtypeAdminCustomPagesSelect')
@@ -82,7 +82,7 @@ class ProcessAdminCustomPages extends Process {
 
 		} else {
 
-			return $this->error("You have to assign a template file to this 'Admin Custom Page'."); 
+			return $this->error(__("You have to assign a template file to this 'Admin Custom Page'.")); 
 
 		}
 
@@ -93,7 +93,7 @@ class ProcessAdminCustomPages extends Process {
 		
 		// Check if PW 2.4 or higher is installed
 		if(ProcessWire::versionMajor == 2 && ProcessWire::versionMinor < 4) {
-			throw new WireException("This module requires ProcessWire 2.4 or newer");
+			throw new WireException(__("This module requires ProcessWire 2.4 or newer"));
 		}		
 		
 		// Check for existence of the field below, throw a message if it already exists
@@ -102,10 +102,10 @@ class ProcessAdminCustomPages extends Process {
 			$field = new Field();
 			$field->type = $this->modules->get("FieldtypeTextarea");
 			$field->name = 'ACP_scripts_and_styles';
-			$field->label = 'Scripts and styles for admin pages';
-			$field->description = 'Add the .js and .css URLs in this field textarea, one in each line. can be absolute or relative (relative is assumed from the site root eg: site/templates/styles/my.css)';
+			$field->label = __('Scripts and styles for admin pages');
+			$field->description = __('Add the .js and .css URLs in this field textarea, one in each line. can be absolute or relative (relative is assumed from the site root eg: site/templates/styles/my.css)');
 			$field->save();
-			$this->message("Added field 'ACP_scripts_and_styles'. Add this field to the page template of your custom admin pages when needed.");
+			$this->message(__("Added field 'ACP_scripts_and_styles'. Add this field to the page template of your custom admin pages when needed."));
 		}
 		
 		
@@ -114,8 +114,8 @@ class ProcessAdminCustomPages extends Process {
 			$field = new Field();
 			$field->type = $this->modules->get("FieldtypeAdminCustomPagesSelect");
 			$field->name = 'ACP_template';
-			$field->label = 'Template file';
-			$field->description = 'Select the template file which should get rendered. Template files have to be in /site/templates/.';
+			$field->label = 'Template';
+			$field->description = __('Select the template which should get rendered. Templates have to be in /site/templates/.');
 			$field->save();
 		
 			// Add field to admin template
@@ -123,7 +123,7 @@ class ProcessAdminCustomPages extends Process {
 			$adminTemplate->fields->add($field);
 			$adminTemplate->fields->save();
 			
-			$this->message("Added field 'ACP_template' to admin.");
+			$this->message(__("Added field 'ACP_template' to admin."));
 		}
 		
 	}

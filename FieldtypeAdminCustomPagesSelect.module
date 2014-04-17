@@ -27,7 +27,7 @@ class FieldtypeAdminCustomPagesSelect extends Fieldtype {
 		  return array(
 		  'title' => 'Admin Custom Pages Select',
 		  'version' => 100,
-		  'summary' => 'This Fieldtype creates an template selector for "Admin Custom Pages".'
+		  'summary' => __('This Fieldtype creates an template selector for "Admin Custom Pages".')
 		  );
      }
 
@@ -68,7 +68,7 @@ class FieldtypeAdminCustomPagesSelect extends Fieldtype {
 		$files = @glob($path.$pattern, $flags);
 
 		
-		foreach ($paths as $path) { $files = @array_merge((array)$files,(array)rglob($pattern, $flags, $path)); }
+		foreach ($paths as $path) { $files = @array_merge((array)$files,(array)$this->rglob($pattern, $flags, $path)); }
 		
 		foreach($files as $key => $file) {
 			if($file == '' || $file == false || !$file) {
