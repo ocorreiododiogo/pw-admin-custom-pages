@@ -2,12 +2,10 @@
 
 ### Create custom admin pages easily without having to build a Process Module.
  
-The new version of this module works better with the current DEV version of PW, 
-but also works with the stable version. Differences are explained bellow.
+The new version of this module works only with ProcessWire 2.4 and higher.
+Differences are explained bellow.
 
-Since version 1.0.4 the installation process automaticaly replaces the default admin.php file in the templates folder by the provided one and creates a new field called "ACP_scripts_and_styles". This functionality was added by [Pete](https://github.com/Notanotherdotcom)
-
-**Note:** If you (or a module) already customised the admin.php file before, make a backup of that file, and add the custom code to the newly created admin.php. 
+Since version 1.1.0 the installation process automatically adds a custom Fieldtype to the admin template. This creates a select field where you can choose the template file to render. This functionality was added by [Nico](https://nico.is)
 
 ### To prepare the module:
 
@@ -16,23 +14,11 @@ Since version 1.0.4 the installation process automaticaly replaces the default a
 
 ### To create the pages:
 
-*In the current PW stable version*
+*In the current PW 2.4 stable version*
 
-1. Create a new template **without** a file (name it whatever you wish)
-2. In the advanced settings insert "admin" as the Alternate Template Filename
-3. Create a new page under "Admin" and give it the newly created template
-4. create a page as children and give it any template (this is the template that will be rendered in the admin page. For use with a theme that uses dropdown menus, set this page to "hidden" in the settings tab)
-5. In this template file you can use PW variables as in any normal template
-  
---
-
-*In the current PW DEV version*
-
-1. Create a new template **with** a file (name it whatever you wish)
-2. In the advanced settings insert "admin" as the Alternate Template Filename
-3. Create a new page under "Admin" and give it the newly created template
-4. Doesn't exist ;)
-5. In the template file you can use PW variables as in any normal template (yes, pretend you didn't change the file in the settings)
+1. Create a new page under "Admin" and give it the "admin" template. As "process" you have to choose "ProcessCustomPages".
+2. A field called "Template file" will appear. Select the file you want.
+3. That's all.
 
 ### To add custom script and style files to the page:
 
@@ -45,14 +31,7 @@ Since version 1.0.4 the installation process automaticaly replaces the default a
 
 > This page has no Process assigned.
 
-If you are greeted with this message after creating a custom admin page, verify that the /site/templates/admin.php file was modified during the installation process.
-If the file in your template folder is not similar to the one packed with the module, replacing it should solve the problem.
-
-These are the particular lines to look for:
-
-    // line added for the Custom Admin Pages Module
-    if($page->template->id !== 2) $page->process = "ProcessAdminCustomPages";
-
+You probably forgot to choose "ProcessCustomPages" as Process. (See step 1)
 
 
 --
