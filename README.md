@@ -5,7 +5,7 @@
 The new version of this module works only with ProcessWire 2.4 and higher.
 Differences are explained bellow.
 
-Since version 1.1.0 the installation process automatically adds a custom Fieldtype to the admin template. This creates a select field where you can choose the template file to render. This functionality was added by [Nico](https://nico.is)
+Since version 1.1.0 the installation process automatically adds a custom Fieldtype to the admin template. This creates a select field where you can choose the template file to render. This functionality was added by [Nico](http://nico.is)
 
 ### To prepare the module:
 
