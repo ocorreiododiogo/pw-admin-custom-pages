@@ -27,7 +27,7 @@ class FieldtypeAdminCustomPagesSelect extends Fieldtype {
 		  return array(
 		  'title' => 'Admin Custom Pages Select',
 		  'version' => 100,
-		  'summary' => __('This Fieldtype creates an template selector for "Admin Custom Pages".')
+		  'summary' => __('This Fieldtype creates a template selector for "Admin Custom Pages".')
 		  );
      }
 
