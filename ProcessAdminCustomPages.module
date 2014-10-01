@@ -25,6 +25,7 @@ class ProcessAdminCustomPages extends Process {
 			'version' => 111,
 			'author'  => 'Diogo Oliveira',
 			'permission' => 'page-view',
+			'installs' => array('FieldtypeAdminCustomPagesSelect'),
 			'requires' => array('FieldtypeAdminCustomPagesSelect')
 		);
 	}
