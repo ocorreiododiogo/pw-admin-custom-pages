@@ -3,7 +3,7 @@
 /**
  * FieldtypeAdminCustomPagesSelect 
  *
- * This Fieldtype creates an template selector for "Admin Custom Pages".
+ * This Fieldtype creates a template selector for "Admin Custom Pages".
  *
  * For documentation about the fields used in this class, please see:
  * /wire/core/Fieldtype.php
