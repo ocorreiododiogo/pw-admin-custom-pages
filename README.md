@@ -14,8 +14,6 @@ Since version 1.1.0 the installation process automatically adds a custom Fieldty
 
 ### To create the pages:
 
-*In the current PW 2.4 stable version*
-
 1. Create a new page under "Admin" and give it the "admin" template. As "process" you have to choose "ProcessAdminCustomPages".
 2. A field called "Template file" will appear. Select the file you want (we recommend that the file name starts with underscore "\_" so it doesn't appear in new template sugestions, ex: "\_custom.php").
 3. That's all.
