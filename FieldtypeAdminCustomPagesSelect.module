@@ -52,7 +52,7 @@ class FieldtypeAdminCustomPagesSelect extends Fieldtype {
 	     
 	     foreach($files as $file) {
 		     $templateFiles[] = array(
-		     	'path' 		=> $file,
+		     	'path' 		=> 	"/" . str_replace(wire('config')->paths->root, '', $file), // Make path relative
 		     	'basename' 	=> str_replace($globPath, '', $file)
 		     );
 	     }
