@@ -67,7 +67,7 @@ class ProcessAdminCustomPages extends Process {
 
 	public function ___execute() {
 
-		$template_file = $this->page->ACP_template;
+		$template_file = wire('config')->paths->root . $this->page->ACP_template;
 
 		if (file_exists($template_file)) {
 
