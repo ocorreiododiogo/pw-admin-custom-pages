@@ -7,6 +7,9 @@ Differences are explained bellow.
 
 Since version 1.1.0 the installation process automatically adds a custom Fieldtype to the admin template. This creates a select field where you can choose the template file to render. This functionality was added by [Nico](http://nico.is)
 
+☞ This module makes it easy to create simple admin pages but you can also create them in much more powerfull way without the need of a module. Have a look at this post written by Bernhard Baumrock to know how it's done https://processwire.com/blog/posts/building-custom-admin-pages-with-process-modules/
+
+
 ### To prepare the module:
 
 1. Place the module folder in /site/modules/
