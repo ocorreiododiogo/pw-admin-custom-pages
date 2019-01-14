@@ -1,14 +1,14 @@
 <?php
 
 /*
-	* Admin Custom Pages Module v 1.0.4
+	* Admin Custom Pages Module v 1.0.5
 	* Create custom admin pages without building a Process Module
 	*
 	* @author Diogo Oliveira
 	*
 	* @modified Nico Knoll
 	*
-	* ProcessWire 2.x
+	* ProcessWire 3.x
 	* Copyright (C) 2011 by Ryan Cramer
 	* Licensed under GNU/GPL v2, see LICENSE.TXT
 	*
